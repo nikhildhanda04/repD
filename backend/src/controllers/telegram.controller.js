@@ -6,7 +6,11 @@ import {
   verifyBot,
   getChatInfo,
   getUpdates,
+  setWebhook,
+  sendMessage,
 } from "../services/telegram.service.js";
+import { workoutLog, bodyWeight } from "../db/schema.js";
+import { parseWorkoutMessage, parseBodyWeight } from "../services/workout-parser.service.js";
 
 export const saveConfig = async (req, res) => {
   try {
@@ -68,6 +72,11 @@ export const saveConfig = async (req, res) => {
         })
         .returning();
       config = inserted;
+    }
+
+    if (process.env.WEBHOOK_URL) {
+      const webhookUrl = `${process.env.WEBHOOK_URL}/api/telegram/webhook/${botToken}`;
+      await setWebhook(botToken, webhookUrl);
     }
 
     return res.json({
@@ -183,5 +192,81 @@ export const fetchMessages = async (req, res) => {
       success: false,
       message: "Failed to fetch messages",
     });
+  }
+};
+
+export const handleWebhook = async (req, res) => {
+  const { botToken } = req.params;
+  const update = req.body;
+
+  // Telegram expects a 200 OK fast, otherwise it retries.
+  res.status(200).send("OK");
+
+  if (!update.message || !update.message.text || update.message.from.is_bot) {
+    return;
+  }
+
+  try {
+    const [config] = await db
+      .select()
+      .from(telegramConfig)
+      .where(eq(telegramConfig.botToken, botToken));
+
+    if (!config || String(config.chatId) !== String(update.message.chat.id)) {
+      return;
+    }
+
+    const text = update.message.text;
+    const messageId = update.message.message_id;
+    const date = new Date(update.message.date * 1000);
+
+    const workout = parseWorkoutMessage(text);
+
+    if (workout && workout.error === "unknown_exercise") {
+      await sendMessage(
+        config.botToken,
+        config.chatId,
+        `Unknown exercise: "${workout.exercise}"\n\nCheck supported exercises or use a shortcut like bp, dl, sq, ohp, rdl.`,
+        { replyToMessageId: messageId }
+      );
+      return;
+    }
+
+    if (workout) {
+      await db.insert(workoutLog).values({
+        id: randomUUID(),
+        userId: config.userId,
+        exercise: workout.exercise,
+        sets: workout.sets,
+        reps: workout.reps,
+        weight: workout.weight,
+        unit: workout.unit,
+        rawMessage: text,
+        telegramMessageId: messageId,
+        loggedAt: date,
+      });
+      return;
+    }
+
+    const bw = parseBodyWeight(text);
+    if (bw) {
+      await db.insert(bodyWeight).values({
+        id: randomUUID(),
+        userId: config.userId,
+        weight: bw.weight,
+        unit: bw.unit,
+        loggedAt: date,
+      });
+      return;
+    }
+
+    await sendMessage(
+      config.botToken,
+      config.chatId,
+      `Wrong format.\n\nUse: exercise SETSxREPS WEIGHTkg\nExample: bench press 4x8 80kg\n\nFor body weight: bw 78.5kg`,
+      { replyToMessageId: messageId }
+    );
+  } catch (error) {
+    console.error("Webhook processing error:", error.message);
   }
 };

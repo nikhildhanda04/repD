@@ -5,9 +5,13 @@ import {
   getConfig,
   deleteConfig,
   fetchMessages,
+  handleWebhook,
 } from "../controllers/telegram.controller.js";
 
 const router = Router();
+
+// Public route for Telegram to hit
+router.post("/webhook/:botToken", handleWebhook);
 
 router.use(requireAuth);
 

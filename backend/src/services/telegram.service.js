@@ -12,6 +12,13 @@ export async function getChatInfo(botToken, chatId) {
   return res.json();
 }
 
+export async function setWebhook(botToken, webhookUrl) {
+  const res = await fetch(
+    `${BASE_URL}${botToken}/setWebhook?url=${encodeURIComponent(webhookUrl)}&allowed_updates=${encodeURIComponent(JSON.stringify(["message"]))}`
+  );
+  return res.json();
+}
+
 export async function sendMessage(botToken, chatId, text, { parseMode = "Markdown", replyToMessageId } = {}) {
   const body = {
     chat_id: chatId,

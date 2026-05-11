@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils";
 
 export function PixelLoader({ className, size = 16, color = "currentColor", ...props }) {
-  // A simple 8-bit style dot matrix spinning animation
-  // Uses 8 dots arranged in a square ring, lighting up one by one
+
   return (
     <div
       className={cn("relative grid grid-cols-3 grid-rows-3 gap-[2px]", className)}
