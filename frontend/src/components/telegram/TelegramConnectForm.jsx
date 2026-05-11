@@ -3,7 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 // import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -121,7 +122,7 @@ export function TelegramConnectForm({ existingConfig, onConnected }) {
           )}
 
           <Button type="submit" disabled={loading} className="w-full cursor-pointer">
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading && <Loader size={16} className="mr-2" />}
             Connect Bot
           </Button>
         </form>

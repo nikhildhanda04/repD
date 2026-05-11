@@ -16,11 +16,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route
               path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
+              element={<DashboardPage />}
             />
             <Route
               path="/telegram"

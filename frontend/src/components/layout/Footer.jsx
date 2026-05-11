@@ -3,7 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Send, Loader2, CheckCircle } from "lucide-react";
+import { Send, CheckCircle } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -84,7 +85,7 @@ export function Footer() {
 
               <Button type="submit" disabled={loading} className="cursor-pointer">
                 {loading ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader size={16} className="mr-2" />
                 ) : (
                   <Send className="mr-2 h-4 w-4" />
                 )}

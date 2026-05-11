@@ -10,7 +10,13 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight">repD</span>
+          <div className="grid grid-cols-2 gap-0.5">
+            <div className="h-2 w-2 rounded-full bg-foreground" />
+            <div className="h-2 w-2 rounded-full bg-foreground" />
+            <div className="h-2 w-2 rounded-full bg-foreground" />
+            <div className="h-2 w-2 rounded-full bg-foreground" />
+          </div>
+          <span className="text-lg font-bold tracking-tight">repD</span>
         </Link>
         <nav className="flex items-center gap-4">
           {loading ? (

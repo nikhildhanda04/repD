@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import {
   Dialog,
@@ -8,6 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { PixelLoader } from "@/components/ui/pixel-loader";
 
 function GoogleIcon() {
   return (
@@ -34,6 +36,12 @@ function GoogleIcon() {
 
 export function LoginDialog({ trigger }) {
   const { signInWithGoogle } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setLoading(true);
+    await signInWithGoogle();
+  };
 
   return (
     <Dialog>
@@ -51,16 +59,17 @@ export function LoginDialog({ trigger }) {
         </DialogHeader>
         <div className="mt-4">
           <Button
-            onClick={signInWithGoogle}
+            onClick={handleSignIn}
+            disabled={loading}
             variant="outline"
             className="w-full h-12 text-base font-medium gap-3 cursor-pointer"
           >
-            <GoogleIcon />
+            {loading ? <PixelLoader size={20} /> : <GoogleIcon />}
             Continue with Google
           </Button>
-          <p className="text-xs text-muted-foreground text-center mt-4">
+          {/* <p className="text-xs text-muted-foreground text-center mt-4">
             By continuing, you agree to our Terms of Service and Privacy Policy.
-          </p>
+          </p> */}
         </div>
       </DialogContent>
     </Dialog>
