@@ -1,11 +1,11 @@
 export function ProgressCard() {
   return (
     <div
-      className="absolute -left-20 -bottom-8 hidden lg:block animate-float-slower"
+      className="absolute -left-40 -bottom-56 hidden lg:block animate-float-slower"
       style={{ transform: "rotate(-4deg)" }}
     >
       <div className="relative">
-        <div className="w-80 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
+        <div className="w-96 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
           <div className="px-5 py-3 border-b border-border/20 flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-foreground">Bench Press</p>

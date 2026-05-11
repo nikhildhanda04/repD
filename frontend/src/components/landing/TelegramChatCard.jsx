@@ -1,8 +1,8 @@
 export function TelegramChatCard() {
   return (
     <div
-      className="absolute -left-28 top-12 hidden lg:block animate-float-slow"
-      style={{ transform: "rotate(-8deg)" }}
+      className="absolute -left-48 top-12 rotate-10 hidden lg:block animate-float-slow"
+      style={{ transform: "rotate(-18deg)" }}
     >
       <div className="relative">
         <div className="absolute -top-6 -left-6 h-16 w-16 rounded-2xl bg-white border border-border/40 shadow-xl flex items-center justify-center z-10">
@@ -11,7 +11,7 @@ export function TelegramChatCard() {
           </svg>
         </div>
 
-        <div className="w-80 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
+        <div className="w-96 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
           <div className="bg-gradient-to-r from-blue-500/10 to-blue-400/5 px-5 py-3 border-b border-border/20">
             <p className="text-sm font-semibold text-foreground">Gym Log</p>
             <p className="text-[11px] text-muted-foreground">3 members</p>

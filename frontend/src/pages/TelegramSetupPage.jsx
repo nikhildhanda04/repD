@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { TelegramSetupGuide } from "@/components/telegram/TelegramSetupGuide";
 import { TelegramConnectForm } from "@/components/telegram/TelegramConnectForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export function TelegramSetupPage() {
   const [config, setConfig] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchConfig();
@@ -52,13 +56,13 @@ export function TelegramSetupPage() {
       <Separator className="my-6" />
 
       {config && (
-        <div className="mb-8">
+        <div className="mb-8 space-y-6">
           <TelegramConnectForm
             existingConfig={config}
             onConnected={handleConnected}
           />
 
-          <Card className="mt-6">
+          <Card>
             <CardHeader>
               <CardTitle className="text-base">How to log workouts</CardTitle>
             </CardHeader>
@@ -85,6 +89,15 @@ export function TelegramSetupPage() {
               </p>
             </CardContent>
           </Card>
+
+          <Button
+            size="lg"
+            onClick={() => navigate("/dashboard")}
+            className="w-full cursor-pointer gap-2"
+          >
+            Continue to Dashboard
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </div>
       )}
 

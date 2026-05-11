@@ -1,7 +1,7 @@
 export function WeeklySummaryCard() {
   return (
     <div
-      className="absolute -right-32 top-8 hidden lg:block animate-float-slower"
+      className="absolute -right-56 top-8 -rotate-15 hidden lg:block animate-float-slower"
       style={{ transform: "rotate(6deg)" }}
     >
       <div className="relative">
@@ -13,7 +13,7 @@ export function WeeklySummaryCard() {
           </svg>
         </div>
 
-        <div className="w-80 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
+        <div className="w-96 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
           <div className="px-5 py-3 border-b border-border/20">
             <p className="text-sm font-semibold text-foreground">Weekly Summary</p>
             <p className="text-[11px] text-muted-foreground">May 5 - May 11</p>

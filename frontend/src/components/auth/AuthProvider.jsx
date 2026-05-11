@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
   async function signInWithGoogle() {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: window.location.origin + "/dashboard",
+      callbackURL: window.location.origin + "/telegram",
     });
   }
 

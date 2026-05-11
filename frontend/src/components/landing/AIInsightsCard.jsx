@@ -1,11 +1,11 @@
 export function AIInsightsCard() {
   return (
     <div
-      className="absolute -right-24 -bottom-4 hidden lg:block animate-float-slow"
+      className="absolute -right-10 -bottom-52 hidden lg:block animate-float-slow"
       style={{ transform: "rotate(5deg)" }}
     >
       <div className="relative">
-        <div className="absolute -top-6 -right-3 h-14 w-14 rounded-2xl bg-white border border-border/40 shadow-xl flex items-center justify-center z-10">
+        <div className="absolute -top-6  -right-3 h-14 w-14 rounded-2xl bg-white border border-border/40 shadow-xl flex items-center justify-center z-10">
           <svg viewBox="0 0 24 24" className="h-7 w-7 text-purple-500" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M12 2v4m0 12v4M2 12h4m12 0h4" />
             <circle cx="12" cy="12" r="4" />
@@ -13,7 +13,7 @@ export function AIInsightsCard() {
           </svg>
         </div>
 
-        <div className="w-72 rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
+        <div className="w-[22rem] rounded-3xl bg-white/90 backdrop-blur-sm border border-border/30 shadow-2xl overflow-hidden">
           <div className="bg-gradient-to-r from-purple-500/10 to-violet-400/5 px-5 py-3 border-b border-border/20">
             <p className="text-sm font-semibold text-foreground">AI Coach</p>
             <p className="text-[11px] text-muted-foreground">Powered by Gemini</p>
