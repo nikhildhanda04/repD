@@ -22,7 +22,8 @@
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "nodemailer": "^8.0.7"
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.1",
